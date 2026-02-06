@@ -1,0 +1,556 @@
+/* ============================================
+   ROMANTIC PROPOSAL WEBSITE - CUSTOM STYLES
+   ============================================ */
+
+/* CSS Variables for consistent theming */
+:root {
+    --primary-pink: #ec4899;
+    --primary-rose: #f43f5e;
+    --primary-purple: #9333ea;
+    --soft-pink: #fce7f3;
+    --warm-rose: #ffe4e6;
+    --gradient-main: linear-gradient(135deg, #ec4899 0%, #f43f5e 50%, #9333ea 100%);
+    --gradient-soft: linear-gradient(135deg, #fce7f3 0%, #ffe4e6 100%);
+    --shadow-glow: 0 0 30px rgba(236, 72, 153, 0.4);
+    --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.15);
+    --font-heading: 'Dancing Script', cursive;
+    --font-body: 'Poppins', sans-serif;
+}
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--gradient-soft);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   PARTICLES BACKGROUND
+   ============================================ */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#particles-js canvas {
+    display: block;
+    vertical-align: bottom;
+}
+
+/* ============================================
+   CURTAIN / ENVELOPE OPENING
+   ============================================ */
+#curtain {
+    background: var(--gradient-main);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Envelope Animation */
+.envelope {
+    width: 120px;
+    height: 80px;
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+.envelope-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #ffffff 0%, #f0f0f0 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.envelope-body::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(145deg, #f8f8f8 0%, #e8e8e8 100%);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    background: linear-gradient(145deg, #ffffff 0%, #f5f5f5 100%);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.heart {
+    font-size: 2.5rem;
+    z-index: 1;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.1); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.05); }
+}
+
+/* Open Button */
+#openBtn {
+    background: white;
+    color: var(--primary-pink);
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+#openBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s ease;
+}
+
+#openBtn:hover::before {
+    left: 100%;
+}
+
+/* ============================================
+   MAIN CONTENT - PROPOSAL CARD
+   ============================================ */
+#mainContent {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.proposal-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+/* Card Header with Photo */
+.card-header {
+    background: var(--gradient-soft);
+    padding: 40px 20px 60px;
+    position: relative;
+}
+
+.photo-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    position: relative;
+    border: 5px solid white;
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+    overflow: hidden;
+}
+
+.proposal-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-container:hover .proposal-photo {
+    transform: scale(1.1);
+}
+
+.photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(236, 72, 153, 0.2) 100%);
+    border-radius: 50%;
+}
+
+/* Floating Hearts Animation */
+.floating-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: floatUp 4s ease-in-out infinite;
+}
+
+.floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.floating-heart:nth-child(2) { left: 25%; animation-delay: 0.8s; }
+.floating-heart:nth-child(3) { left: 50%; animation-delay: 1.6s; }
+.floating-heart:nth-child(4) { left: 75%; animation-delay: 2.4s; }
+.floating-heart:nth-child(5) { left: 90%; animation-delay: 3.2s; }
+
+@keyframes floatUp {
+    0% {
+        opacity: 0;
+        transform: translateY(100px) scale(0.5);
+    }
+    20% {
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.2);
+    }
+}
+
+/* Card Body */
+.card-body {
+    background: white;
+    position: relative;
+    margin-top: -30px;
+    border-radius: 30px 30px 0 0;
+}
+
+/* Message Lines */
+.message-line {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.highlight {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--primary-rose);
+    font-weight: 700;
+}
+
+.question-text {
+    font-family: var(--font-heading);
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+    background-size: 200% auto;
+}
+
+@keyframes shimmer {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+/* ============================================
+   BUTTONS - YES & NO
+   ============================================ */
+.buttons-container {
+    min-height: 80px;
+    position: relative;
+}
+
+/* Yes Button - Glowing and Inviting */
+.yes-button {
+    background: var(--gradient-main);
+    background-size: 200% auto;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: gradientMove 3s ease infinite, glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+    to { box-shadow: 0 0 40px rgba(236, 72, 153, 0.8), 0 0 60px rgba(244, 63, 94, 0.4); }
+}
+
+.yes-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.yes-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.yes-button:hover {
+    transform: scale(1.15);
+    box-shadow: 0 15px 50px rgba(236, 72, 153, 0.5);
+}
+
+/* No Button - Shrinking Effect */
+.no-button {
+    background: #9ca3af;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.no-button:hover {
+    background: #6b7280;
+}
+
+.no-button.shrinking {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    75% { transform: translateX(5px) rotate(5deg); }
+}
+
+/* ============================================
+   CELEBRATION OVERLAY
+   ============================================ */
+#celebrationOverlay {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#celebrationOverlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.celebration-card {
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
+}
+
+#celebrationOverlay.active .celebration-card {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.celebration-hearts {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.celebration-heart {
+    font-size: 3rem;
+    animation: celebrateBounce 1s ease-in-out infinite;
+}
+
+.celebration-heart:nth-child(2) { animation-delay: 0.2s; }
+.celebration-heart:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes celebrateBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.2); }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 640px) {
+    .envelope {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .heart {
+        font-size: 2rem;
+    }
+    
+    #openBtn {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    .photo-container {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .card-header {
+        padding: 30px 15px 50px;
+    }
+    
+    .card-body {
+        padding: 25px 20px;
+    }
+    
+    .highlight {
+        font-size: 1.25rem;
+    }
+    
+    .question-text {
+        font-size: 1.75rem;
+    }
+    
+    .message-line {
+        font-size: 1rem;
+    }
+    
+    .yes-button {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+    
+    .no-button {
+        padding: 10px 18px;
+        font-size: 0.875rem;
+    }
+    
+    .buttons-container {
+        gap: 20px;
+    }
+    
+    .celebration-card {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .celebration-heart {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .photo-container {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .question-text {
+        font-size: 1.5rem;
+    }
+    
+    .buttons-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* ============================================
+   UTILITY ANIMATIONS
+   ============================================ */
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-up {
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pulse animation for attention */
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Sparkle effect */
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0; transform: scale(0); }
+    50% { opacity: 1; transform: scale(1); }
+}

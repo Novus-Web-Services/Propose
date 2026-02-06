@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be Mine? 💕</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="overflow-hidden">
+    
+    <!-- Particles Background -->
+    <div id="particles-js" class="fixed inset-0 z-0"></div>
+    
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop>
+        <source src="assets/Hua Main.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- Opening Curtain/Envelope -->
+    <div id="curtain" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-rose-400 via-pink-500 to-purple-600">
+        <div class="text-center">
+            <div class="envelope mb-8 mx-auto">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <span class="heart">💌</span>
+                </div>
+            </div>
+            <button id="openBtn" class="px-8 py-4 bg-white text-pink-600 font-bold rounded-full shadow-2xl hover:shadow-pink-300/50 transform hover:scale-105 transition-all duration-300 text-lg tracking-wide">
+                Click to Open 💝
+            </button>
+            <p class="text-white/80 mt-4 text-sm font-light">A special message awaits...</p>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main id="mainContent" class="hidden relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div class="proposal-card max-w-lg w-full">
+            <!-- Card Header with Photo -->
+            <div class="card-header relative overflow-hidden">
+                <div class="photo-container mx-auto">
+                    <img src="assets/you.jpeg" alt="Special Someone" class="proposal-photo">
+                    <div class="photo-overlay"></div>
+                </div>
+                <div class="floating-hearts">
+                    <span class="floating-heart">💕</span>
+                    <span class="floating-heart">💖</span>
+                    <span class="floating-heart">💗</span>
+                    <span class="floating-heart">💝</span>
+                    <span class="floating-heart">💘</span>
+                </div>
+            </div>
+            
+            <!-- Card Body -->
+            <div class="card-body text-center p-8">
+                <div class="message-container space-y-4">
+                    <p class="message-line text-xl text-gray-700 font-light" data-delay="0">
+                        <span class="highlight">Hey there, beautiful...</span>
+                    </p>
+                    <p class="message-line text-lg text-gray-600" data-delay="0.8">
+                        I've been meaning to tell you something
+                    </p>
+                    <p class="message-line text-lg text-gray-600" data-delay="1.6">
+                        that I've been holding in my heart
+                    </p>
+                    <p class="message-line text-lg text-gray-600" data-delay="2.4">
+                        for what feels like forever...
+                    </p>
+                    <div class="message-line my-6" data-delay="3.2">
+                        <p class="question-text text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600">
+                            Will You Be Mine? 💍
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Buttons Container -->
+                <div class="buttons-container mt-8 flex items-center justify-center gap-8 relative">
+                    <!-- Yes Button -->
+                    <button id="yesBtn" class="yes-button px-8 py-4 text-white font-bold rounded-full text-lg shadow-xl transform transition-all duration-300 hover:scale-110">
+                        Yes! 💕
+                    </button>
+                    
+                    <!-- No Button -->
+                    <button id="noBtn" class="no-button px-6 py-3 bg-gray-400 text-white font-semibold rounded-full text-base transition-all duration-200">
+                        No 💔
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Celebration Overlay -->
+    <div id="celebrationOverlay" class="fixed inset-0 z-40 hidden items-center justify-center bg-black/60 backdrop-blur-sm">
+        <div class="celebration-card text-center p-8 md:p-12 max-w-md mx-4">
+            <div class="celebration-hearts mb-6">
+                <span class="celebration-heart">🎉</span>
+                <span class="celebration-heart">💕</span>
+                <span class="celebration-heart">🎊</span>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 mb-4" style="font-family: 'Dancing Script', cursive;">
+                She Said Yes!
+            </h2>
+            <p class="text-gray-600 text-lg mb-6">
+                You've made me the happiest person alive! 💖
+            </p>
+            <p class="text-pink-500 text-sm font-medium">
+                Our adventure begins now...
+            </p>
+            <button id="closeCelebration" class="mt-6 px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full text-sm hover:shadow-lg transition-all">
+                Close ✨
+            </button>
+        </div>
+    </div>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
